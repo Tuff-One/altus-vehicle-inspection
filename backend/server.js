@@ -1,8 +1,12 @@
 const express = require('express');
 const db = require('./config/db');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 const PORT = 5000;
+
+app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 app.get('/', (req, res) => {
   res.send('Altus ICT backend is running.');
