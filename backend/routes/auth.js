@@ -49,6 +49,12 @@ router.post('/login', async (req, res) => {
   }
 });
 
+const checkPermission = require('../middleware/checkPermission');
+
+router.get('/test-permission', verifyToken, checkPermission('manage_users'), (req, res) => {
+  res.json({ message: 'You are allowed to manage users.' });
+});
+
 router.get('/me', verifyToken, (req, res) => {
   res.json({ message: 'You are authenticated.', user: req.user });
 });
