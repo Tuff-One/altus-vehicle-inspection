@@ -3,6 +3,7 @@ import Login from './pages/Login.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import VehicleList from './pages/VehicleList.jsx';
+import AddVehicle from './pages/AddVehicle.jsx';
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
           element={
             <ProtectedRoute>
               <VehicleList />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vehicles/add"
+          element={
+            <ProtectedRoute>
+              <AddVehicle />
             </ProtectedRoute>
           }
         />

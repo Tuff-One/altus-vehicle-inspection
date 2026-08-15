@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/useAuth.js';
 import { getVehicles } from '../services/vehicleService.js';
 
 function VehicleList() {
-  const { token } = useAuth();
+  const { token, user } = useAuth();
   const [vehicles, setVehicles] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,6 +28,7 @@ function VehicleList() {
   return (
     <div>
       <h1>Vehicles</h1>
+      {user?.role_id !== 4 && <Link to="/vehicles/add">+ Add Vehicle</Link>}
       <table>
         <thead>
           <tr>

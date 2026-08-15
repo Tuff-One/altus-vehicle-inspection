@@ -8,3 +8,10 @@ export async function getVehicles(token) {
   });
   return response.data;
 }
+
+export async function addVehicle(vehicleData, token) {
+  const response = await axios.post(API_URL, vehicleData, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}
