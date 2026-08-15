@@ -37,4 +37,31 @@ router.post('/', verifyToken, checkPermission('manage_vehicles'), async (req, re
   }
 });
 
+router.put('/:id', verifyToken, checkPermission('manage_vehicles'), async (req, res) => {
+  const { id } = req.params;
+  const { name, type, registration_number, vin, current_mileage, department, status, disk_expiry_date } = req.body;
+
+  if (!name || !type || !registration_number) {
+    return res.status(400).json({ error: 'Name, type, and registration number are required.' });
+  }
+
+  try {
+    const [result] = await db.query(
+      `UPDATE vehicles
+       SET name = ?, type = ?, registration_number = ?, vin = ?, current_mileage = ?, department = ?, status = ?, disk_expiry_date = ?
+       WHERE id = ?`,
+      [name, type, registration_number, vin || null, current_mileage || 0, department || null, status || 'active', disk_expiry_date || null, id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Vehicle not found.' });
+    }
+
+    res.json({ message: 'Vehicle updated.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
 module.exports = router;
