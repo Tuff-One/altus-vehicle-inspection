@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx';
 import VehicleList from './pages/VehicleList.jsx';
 import AddVehicle from './pages/AddVehicle.jsx';
 import InspectionList from './pages/InspectionList.jsx';
+import NewInspection from './pages/NewInspection.jsx';
 
 function App() {
   return (
@@ -43,6 +44,14 @@ function App() {
         </ProtectedRoute>
       }
     />
+    <Route
+  path="/inspections/new"
+  element={
+    <ProtectedRoute>
+      <NewInspection />
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );
