@@ -6,6 +6,7 @@ import VehicleList from './pages/VehicleList.jsx';
 import AddVehicle from './pages/AddVehicle.jsx';
 import InspectionList from './pages/InspectionList.jsx';
 import NewInspection from './pages/NewInspection.jsx';
+import Reports from './pages/Reports.jsx';
 
 function App() {
   return (
@@ -49,6 +50,14 @@ function App() {
   element={
     <ProtectedRoute>
       <NewInspection />
+    </ProtectedRoute>
+  }
+/>
+<Route
+  path="/reports"
+  element={
+    <ProtectedRoute>
+      <Reports />
     </ProtectedRoute>
   }
 />
