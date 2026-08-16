@@ -3,6 +3,7 @@ const cors = require('cors');
 const db = require('./config/db');
 const authRoutes = require('./routes/auth');
 const vehicleRoutes = require('./routes/vehicles');
+const inspectionItemRoutes = require('./routes/inspectionItems');
 
 const app = express();
 const PORT = 5000;
@@ -11,6 +12,7 @@ app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/vehicles', vehicleRoutes);
+app.use('/api/inspection-items', inspectionItemRoutes);
 
 app.get('/', (req, res) => {
   res.send('Altus ICT backend is running.');

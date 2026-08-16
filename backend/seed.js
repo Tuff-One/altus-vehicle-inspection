@@ -67,6 +67,12 @@ async function seed() {
     }
   }
 
+  // Step 5: seed a starter set of inspection items
+  const items = ['Brakes', 'Lights', 'Tyres', 'Oil Level', 'Wipers', 'Horn'];
+  for (const item of items) {
+    await db.query('INSERT IGNORE INTO inspection_items (name) VALUES (?)', [item]);
+  }
+
   console.log('Seed complete.');
   process.exit();
 }
