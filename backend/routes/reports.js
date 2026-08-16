@@ -23,4 +23,22 @@ router.get('/outstanding-issues', verifyToken, checkPermission('view_reports'), 
   }
 });
 
+router.get('/overdue-vehicles', verifyToken, checkPermission('view_reports'), async (req, res) => {
+  try {
+    const [vehicles] = await db.query(`
+      SELECT v.id, v.name, MAX(i.inspection_date) AS last_inspection_date,
+        DATEDIFF(CURDATE(), MAX(i.inspection_date)) AS days_since_inspection
+      FROM vehicles v
+      LEFT JOIN inspections i ON v.id = i.vehicle_id
+      GROUP BY v.id, v.name
+      HAVING last_inspection_date IS NULL OR days_since_inspection > 30
+      ORDER BY days_since_inspection DESC
+    `);
+    res.json(vehicles);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
 module.exports = router;
