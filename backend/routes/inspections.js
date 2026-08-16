@@ -43,4 +43,29 @@ router.post('/', verifyToken, async (req, res) => {
   }
 });
 
+router.get('/', verifyToken, async (req, res) => {
+  try {
+    let query = `
+      SELECT i.*, v.name AS vehicle_name, u.name AS inspector_name
+      FROM inspections i
+      JOIN vehicles v ON i.vehicle_id = v.id
+      JOIN users u ON i.inspector_id = u.id
+    `;
+    const params = [];
+
+    if (req.user.role_id === 4) {
+      query += ' WHERE i.inspector_id = ?';
+      params.push(req.user.id);
+    }
+
+    query += ' ORDER BY i.inspection_date DESC, i.inspection_time DESC';
+
+    const [inspections] = await db.query(query, params);
+    res.json(inspections);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
 module.exports = router;
