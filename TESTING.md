@@ -7,7 +7,7 @@
 - [ ] Login with missing email/password returns 400
 - [ ] Protected routes reject requests with no token
 - [x] Protected routes reject requests with an invalid/tampered token
-- [ ] Protected routes reject requests with an expired token
+- [x] Protected routes reject requests with an expired token
 
 ## Authorization
 - [ ] Admin can access all permission-gated routes
