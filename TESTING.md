@@ -6,7 +6,7 @@
 - [ ] Login with nonexistent email fails with the same generic error
 - [ ] Login with missing email/password returns 400
 - [ ] Protected routes reject requests with no token
-- [ ] Protected routes reject requests with an invalid/tampered token
+- [x] Protected routes reject requests with an invalid/tampered token
 - [ ] Protected routes reject requests with an expired token
 
 ## Authorization
