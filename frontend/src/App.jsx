@@ -7,6 +7,7 @@ import AddVehicle from './pages/AddVehicle.jsx';
 import InspectionList from './pages/InspectionList.jsx';
 import NewInspection from './pages/NewInspection.jsx';
 import Reports from './pages/Reports.jsx';
+import Layout from './components/Layout.jsx';
 
 function App() {
   return (
@@ -17,7 +18,9 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <Layout>
+                <Dashboard />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -25,7 +28,9 @@ function App() {
           path="/vehicles"
           element={
             <ProtectedRoute>
-              <VehicleList />
+              <Layout>
+                <VehicleList />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -33,34 +38,42 @@ function App() {
           path="/vehicles/add"
           element={
             <ProtectedRoute>
-              <AddVehicle />
+              <Layout>
+                <AddVehicle />
+              </Layout>
             </ProtectedRoute>
           }
-            />
-            <Route
-      path="/inspections"
-      element={
-        <ProtectedRoute>
-          <InspectionList />
-        </ProtectedRoute>
-      }
-    />
-    <Route
-  path="/inspections/new"
-  element={
-    <ProtectedRoute>
-      <NewInspection />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/reports"
-  element={
-    <ProtectedRoute>
-      <Reports />
-    </ProtectedRoute>
-  }
-/>
+        />
+        <Route
+          path="/inspections"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <InspectionList />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/inspections/new"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <NewInspection />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Reports />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
