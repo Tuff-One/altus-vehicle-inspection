@@ -79,7 +79,7 @@ function NewInspection() {
   if (loading) return <p>Loading form...</p>;
 
   return (
-    <div>
+    <div className="form-card form-card-wide">
       <h1>New Inspection</h1>
       <form onSubmit={handleSubmit}>
         <div>

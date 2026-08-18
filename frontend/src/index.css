@@ -59,6 +59,32 @@ nav button {
   margin-left: auto;
 }
 
+.form-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  max-width: 420px;
+  margin: var(--space-xl) auto;
+}
+
+.form-card > div {
+  margin-bottom: var(--space-sm);
+}
+
+.form-card.form-card-wide {
+  max-width: 640px;
+}
+
+.form-card button[type="submit"] {
+  margin-top: var(--space-md);
+}
+
+.page-action {
+  display: block;
+  margin: var(--space-sm) 0 var(--space-lg) 0;
+}
+
 h1, h2, h3 {
   font-weight: 600;
   margin: 0 0 var(--space-sm) 0;
@@ -68,6 +94,7 @@ h1, h2, h3 {
 h1 {
   font-size: 1.75rem;
   padding-bottom: var(--space-xs);
+  margin-bottom: var(--space-md);
   border-bottom: 2px solid var(--color-gold);
   display: inline-block;
 }

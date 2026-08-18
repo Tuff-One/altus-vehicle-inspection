@@ -28,7 +28,7 @@ function VehicleList() {
   return (
     <div>
       <h1>Vehicles</h1>
-      {user?.role_id !== 4 && <Link to="/vehicles/add">+ Add Vehicle</Link>}
+     {user?.role_id !== 4 && <Link to="/vehicles/add" className="page-action">+ Add Vehicle</Link>}
       <table>
         <thead>
           <tr>

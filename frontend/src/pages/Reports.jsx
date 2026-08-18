@@ -46,7 +46,7 @@ function Reports() {
             <tr key={i}>
               <td>{row.vehicle_name}</td>
               <td>{row.item_name}</td>
-              <td>{row.status}</td>
+              <td><span className={`status-tag status-${row.status}`}>{row.status.replace('_', ' ')}</span></td>
               <td>{new Date(row.inspection_date).toLocaleDateString()}</td>
             </tr>
           ))}

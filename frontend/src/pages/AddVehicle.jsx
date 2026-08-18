@@ -29,7 +29,7 @@ function AddVehicle() {
   }
 
   return (
-    <div>
+    <div className="form-card">
       <h1>Add Vehicle</h1>
       <form onSubmit={handleSubmit}>
         <div>

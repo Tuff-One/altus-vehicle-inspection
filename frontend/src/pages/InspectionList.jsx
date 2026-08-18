@@ -42,7 +42,7 @@ function InspectionList() {
               <td>{i.vehicle_name}</td>
               <td>{i.inspector_name}</td>
               <td>{new Date(i.inspection_date).toLocaleDateString()}</td>
-              <td>{i.overall_status}</td>
+              <td><span className={`status-tag status-${i.overall_status}`}>{i.overall_status.replace('_', ' ')}</span></td>
             </tr>
           ))}
         </tbody>

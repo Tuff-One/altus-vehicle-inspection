@@ -30,7 +30,7 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="form-card">
       <h1>Altus ICT</h1>
       <form onSubmit={handleSubmit}>
         <div>
