@@ -32,5 +32,5 @@
 - [ ] Driver is denied on all report routes
 
 ## Database
-- [ ] Foreign key constraints reject invalid references
-- [ ] ON DELETE CASCADE behaves as expected where configured
+- [x] Foreign key constraints reject invalid references
+- [x] ON DELETE CASCADE behaves as expected where configured
