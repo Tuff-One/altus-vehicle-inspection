@@ -31,6 +31,23 @@ async function seed() {
     ['Test Driver', 'driver@altus.com', driverPasswordHash, driverRoleId]
   );
 
+  // Step 2c: create boss and supervisor test users
+  const [bossRole] = await db.query('SELECT id FROM roles WHERE name = ?', ['boss']);
+  const bossRoleId = bossRole[0].id;
+  const bossPasswordHash = await bcrypt.hash('bosspass123', 10);
+  await db.query(
+    'INSERT IGNORE INTO users (name, email, password_hash, role_id) VALUES (?, ?, ?, ?)',
+    ['Test Boss', 'boss@altus.com', bossPasswordHash, bossRoleId]
+  );
+
+  const [supervisorRole] = await db.query('SELECT id FROM roles WHERE name = ?', ['supervisor']);
+  const supervisorRoleId = supervisorRole[0].id;
+  const supervisorPasswordHash = await bcrypt.hash('supervisorpass123', 10);
+  await db.query(
+    'INSERT IGNORE INTO users (name, email, password_hash, role_id) VALUES (?, ?, ?, ?)',
+    ['Test Supervisor', 'supervisor@altus.com', supervisorPasswordHash, supervisorRoleId]
+  );
+
 // Step 3: insert permissions
   const permissions = [
     'manage_vehicles',

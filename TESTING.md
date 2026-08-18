@@ -11,8 +11,8 @@
 
 ## Authorization
 - [ ] Admin can access all permission-gated routes
-- [ ] Boss can access all permission-gated routes except manage_boss_accounts-only actions
-- [ ] Supervisor can access manage_vehicles/manage_inspections/view_reports but not manage_users
+- [x] Boss can access all permission-gated routes except manage_boss_accounts-only actions (partial — no manage_boss_accounts route exists yet to test against, revisit when Manage Users screen is built)
+- [x] Supervisor can access manage_vehicles/manage_inspections/view_reports but not manage_users
 - [ ] Driver is denied on manage_vehicles, manage_inspection_items, manage_users, view_reports
 - [ ] Driver can still create/view own inspections
 
