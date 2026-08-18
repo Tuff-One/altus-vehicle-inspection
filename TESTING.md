@@ -34,3 +34,10 @@
 ## Database
 - [x] Foreign key constraints reject invalid references
 - [x] ON DELETE CASCADE behaves as expected where configured
+
+## Validation
+- [x] Vehicle creation rejects missing/empty required fields
+- [x] Inspection creation rejects an empty results array
+- [x] Inspection creation with a nonexistent vehicle_id fails cleanly via foreign key constraint, transaction rolls back with no orphaned data
+
+- [ ] Responsive testing (blocked: no styling/CSS implemented yet, revisit once UI polish is done)
