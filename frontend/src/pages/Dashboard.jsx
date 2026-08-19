@@ -11,10 +11,27 @@ function Dashboard() {
       {/* <button onClick={logoutUser}>Log Out</button> */}
 
       {isDriver ? (
-        <p>My recent inspections will go here.</p>
-      ) : (
-        <p>Fleet-wide stats will go here.</p>
-      )}
+  <p>My recent inspections will go here.</p>
+) : (
+  <div className="stat-grid">
+    <div className="stat-card">
+      <span className="stat-value">--</span>
+      <span className="stat-label">Total Vehicles</span>
+    </div>
+    <div className="stat-card">
+      <span className="stat-value">--</span>
+      <span className="stat-label">Open Faults</span>
+    </div>
+    <div className="stat-card">
+      <span className="stat-value">--</span>
+      <span className="stat-label">Overdue Inspections</span>
+    </div>
+    <div className="stat-card">
+      <span className="stat-value">--</span>
+      <span className="stat-label">This Week's Inspections</span>
+    </div>
+  </div>
+)}
     </div>
   );
 }
