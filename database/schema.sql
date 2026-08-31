@@ -54,6 +54,7 @@ CREATE TABLE inspections (
     inspector_id INT NOT NULL,
     inspection_date DATE NOT NULL,
     inspection_time TIME NOT NULL,
+    mileage INT NULL,
     overall_status VARCHAR(30) NOT NULL,
     comments TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

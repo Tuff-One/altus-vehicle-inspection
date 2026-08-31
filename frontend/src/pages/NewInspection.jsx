@@ -21,6 +21,7 @@ function NewInspection() {
   const [itemStatuses, setItemStatuses] = useState({});
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [mileage, setMileage] = useState('');
 
   useEffect(() => {
     async function loadData() {
@@ -64,6 +65,7 @@ function NewInspection() {
           overall_status: overallStatus,
           comments,
           results,
+          mileage,
         },
         token
       );
@@ -101,6 +103,11 @@ function NewInspection() {
           <label htmlFor="time">Time</label>
           <input id="time" type="time" value={inspectionTime} onChange={(e) => setInspectionTime(e.target.value)} required />
         </div>
+
+        <div>
+  <label htmlFor="mileage">Mileage</label>
+  <input id="mileage" type="number" value={mileage} onChange={(e) => setMileage(e.target.value)} required />
+</div>
 
         <h2>Checklist</h2>
         {items.map((item) => (

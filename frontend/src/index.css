@@ -70,7 +70,7 @@ nav button {
   margin: var(--space-xl) auto;
 }
 
-.form-card > div {
+.form-card form> div {
   margin-bottom: var(--space-sm);
 }
 

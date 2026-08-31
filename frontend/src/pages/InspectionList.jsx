@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/useAuth.js';
 import { getInspections } from '../services/inspectionService.js';
+import { Link } from 'react-router-dom';
 
 function InspectionList() {
   const { token } = useAuth();
@@ -27,6 +28,7 @@ function InspectionList() {
   return (
     <div>
       <h1>Inspections</h1>
+      <Link to="/inspections/new" className="page-action">+ New Inspection</Link>
       <table>
         <thead>
           <tr>

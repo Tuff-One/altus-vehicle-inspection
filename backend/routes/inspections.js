@@ -5,11 +5,11 @@ const verifyToken = require('../middleware/auth');
 const router = express.Router();
 
 router.post('/', verifyToken, async (req, res) => {
-  const { vehicle_id, inspection_date, inspection_time, overall_status, comments, results } = req.body;
+ const { vehicle_id, inspection_date, inspection_time, mileage, overall_status, comments, results } = req.body;
 
-  if (!vehicle_id || !inspection_date || !inspection_time || !overall_status || !results?.length) {
-    return res.status(400).json({ error: 'Missing required inspection fields.' });
-  }
+if (!vehicle_id || !inspection_date || !inspection_time || !mileage || !overall_status || !results?.length) {
+  return res.status(400).json({ error: 'Missing required inspection fields.' });
+}
 
   const connection = await db.getConnection();
 
@@ -17,10 +17,15 @@ router.post('/', verifyToken, async (req, res) => {
     await connection.beginTransaction();
 
     const [inspectionResult] = await connection.query(
-      `INSERT INTO inspections (vehicle_id, inspector_id, inspection_date, inspection_time, overall_status, comments)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [vehicle_id, req.user.id, inspection_date, inspection_time, overall_status, comments || null]
-    );
+  `INSERT INTO inspections (vehicle_id, inspector_id, inspection_date, inspection_time, mileage, overall_status, comments)
+   VALUES (?, ?, ?, ?, ?, ?, ?)`,
+  [vehicle_id, req.user.id, inspection_date, inspection_time, mileage, overall_status, comments || null]
+);
+
+await connection.query(
+  `UPDATE vehicles SET current_mileage = ? WHERE id = ?`,
+  [mileage, vehicle_id]
+);
 
     const inspectionId = inspectionResult.insertId;
 

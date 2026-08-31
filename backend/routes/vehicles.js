@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', verifyToken, async (req, res) => {
   try {
-    const [vehicles] = await db.query('SELECT * FROM vehicles ORDER BY name');
+    const [vehicles] = await db.query("SELECT * FROM vehicles WHERE status <> 'inactive' ORDER BY name");
     res.json(vehicles);
   } catch (err) {
     console.error(err);
@@ -58,6 +58,20 @@ router.put('/:id', verifyToken, checkPermission('manage_vehicles'), async (req, 
     }
 
     res.json({ message: 'Vehicle updated.' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
+router.delete('/:id', verifyToken, checkPermission('manage_vehicles'), async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [result] = await db.query('UPDATE vehicles SET status = ? WHERE id = ?', ['inactive', id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Vehicle not found.' });
+    }
+    res.json({ message: 'Vehicle removed.' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Something went wrong.' });

@@ -23,3 +23,10 @@ export async function getRecurringIssues(token) {
   });
   return response.data;
 }
+
+export async function getDashboardStats(token) {
+  const response = await axios.get(`${API_URL}/dashboard-stats`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}

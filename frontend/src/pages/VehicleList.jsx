@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/useAuth.js';
-import { getVehicles } from '../services/vehicleService.js';
+import { getVehicles, removeVehicle } from '../services/vehicleService.js';
 
 function VehicleList() {
   const { token, user } = useAuth();
@@ -23,12 +23,22 @@ function VehicleList() {
     loadVehicles();
   }, [token]);
 
+  async function handleRemove(id) {
+    if (!window.confirm('Remove this vehicle? It will no longer appear in the active list.')) return;
+    try {
+      await removeVehicle(id, token);
+      setVehicles((prev) => prev.filter((v) => v.id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   if (loading) return <p>Loading vehicles...</p>;
 
   return (
     <div>
       <h1>Vehicles</h1>
-     {user?.role_id !== 4 && <Link to="/vehicles/add" className="page-action">+ Add Vehicle</Link>}
+      {user?.role_id !== 4 && <Link to="/vehicles/add" className="page-action">+ Add Vehicle</Link>}
       <table>
         <thead>
           <tr>
@@ -37,6 +47,7 @@ function VehicleList() {
             <th>Registration</th>
             <th>Mileage</th>
             <th>Status</th>
+            {user?.role_id !== 4 && <th></th>}
           </tr>
         </thead>
         <tbody>
@@ -47,6 +58,9 @@ function VehicleList() {
               <td>{v.registration_number}</td>
               <td>{v.current_mileage}</td>
               <td>{v.status}</td>
+              {user?.role_id !== 4 && (
+                <td><button onClick={() => handleRemove(v.id)}>Remove</button></td>
+              )}
             </tr>
           ))}
         </tbody>

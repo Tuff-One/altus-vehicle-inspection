@@ -16,3 +16,10 @@ export async function addVehicle(vehicleData, token) {
   });
   return response.data;
 }
+
+export async function removeVehicle(id, token) {
+  const response = await axios.delete(`${API_URL}/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}

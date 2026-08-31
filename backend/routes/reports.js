@@ -61,4 +61,36 @@ router.get('/recurring-issues', verifyToken, checkPermission('view_reports'), as
   }
 });
 
+router.get('/dashboard-stats', verifyToken, checkPermission('view_reports'), async (req, res) => {
+  try {
+    const [[{ totalVehicles }]] = await db.query('SELECT COUNT(*) AS totalVehicles FROM vehicles');
+
+    const [[{ openFaults }]] = await db.query(
+      `SELECT COUNT(*) AS openFaults FROM inspection_results WHERE status IN ('faulty', 'needs_attention')`
+    );
+
+    const [overdueRows] = await db.query(`
+      SELECT v.id
+      FROM vehicles v
+      LEFT JOIN inspections i ON v.id = i.vehicle_id
+      GROUP BY v.id
+      HAVING MAX(i.inspection_date) IS NULL OR DATEDIFF(CURDATE(), MAX(i.inspection_date)) > 30
+    `);
+
+    const [[{ weekCount }]] = await db.query(
+      `SELECT COUNT(*) AS weekCount FROM inspections WHERE inspection_date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)`
+    );
+
+    res.json({
+      totalVehicles,
+      openFaults,
+      overdueCount: overdueRows.length,
+      weekCount,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
 module.exports = router;
