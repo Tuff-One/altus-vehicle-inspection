@@ -23,7 +23,11 @@ function Login() {
       navigate('/dashboard');
     } catch (err) {
       console.error(err);
-      setError('Invalid email or password.');
+      if (err.response?.status === 403) {
+        setError(err.response.data.error);
+      } else {
+        setError('Invalid email or password.');
+      }
     } finally {
       setLoading(false);
     }

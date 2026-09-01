@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
 const verifyToken = require('../middleware/auth');
+const checkPermission = require('../middleware/checkPermission');
 
 const router = express.Router();
 
@@ -21,6 +22,11 @@ router.post('/login', async (req, res) => {
     }
 
     const user = rows[0];
+
+    if (!user.is_active) {
+      return res.status(403).json({ error: 'This account has been deactivated. Contact an administrator.' });
+    }
+
     const passwordMatches = await bcrypt.compare(password, user.password_hash);
 
     if (!passwordMatches) {
@@ -48,8 +54,6 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ error: 'Something went wrong.' });
   }
 });
-
-const checkPermission = require('../middleware/checkPermission');
 
 router.get('/test-permission', verifyToken, checkPermission('manage_users'), (req, res) => {
   res.json({ message: 'You are allowed to manage users.' });

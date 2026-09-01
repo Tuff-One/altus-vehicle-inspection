@@ -6,6 +6,7 @@ const vehicleRoutes = require('./routes/vehicles');
 const inspectionItemRoutes = require('./routes/inspectionItems');
 const inspectionRoutes = require('./routes/inspections');
 const reportRoutes = require('./routes/reports');
+const userRoutes = require('./routes/users');
 
 const app = express();
 const PORT = 5000;
@@ -17,6 +18,7 @@ app.use('/api/vehicles', vehicleRoutes);
 app.use('/api/inspection-items', inspectionItemRoutes);
 app.use('/api/inspections', inspectionRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/users', userRoutes);
 
 app.get('/', (req, res) => {
   res.send('Altus ICT backend is running.');

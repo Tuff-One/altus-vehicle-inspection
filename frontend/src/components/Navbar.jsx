@@ -11,6 +11,7 @@ function Navbar() {
       <Link to="/vehicles">Vehicles</Link>
       <Link to="/inspections">Inspections</Link>
       {!isDriver && <Link to="/reports">Reports</Link>}
+      {(user?.role_id === 1 || user?.role_id === 2) && <Link to="/users">Users</Link>}
       <button onClick={logoutUser}>Log Out</button>
     </nav>
   );

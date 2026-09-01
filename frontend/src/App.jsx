@@ -8,6 +8,7 @@ import InspectionList from './pages/InspectionList.jsx';
 import NewInspection from './pages/NewInspection.jsx';
 import Reports from './pages/Reports.jsx';
 import Layout from './components/Layout.jsx';
+import ManageUsers from './pages/ManageUsers.jsx';
 
 function App() {
   return (
@@ -74,6 +75,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/users"
+  element={
+    <ProtectedRoute>
+      <Layout>
+        <ManageUsers />
+      </Layout>
+    </ProtectedRoute>
+  }
+/>
       </Routes>
     </BrowserRouter>
   );
