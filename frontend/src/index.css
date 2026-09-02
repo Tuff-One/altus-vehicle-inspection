@@ -102,9 +102,10 @@ nav button {
 }
 
 .stat-card .stat-label {
-  border-bottom: 1px solid var(--color-gold);
-  padding-bottom: 0.35rem;
-  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
 }
 
 .stat-card .stat-value {
@@ -129,10 +130,7 @@ h1, h2, h3 {
 
 h1 {
   font-size: 1.75rem;
-  padding-bottom: var(--space-xs);
   margin-bottom: var(--space-md);
-  border-bottom: 2px solid var(--color-gold);
-  display: inline-block;
 }
 
 h2 {
@@ -184,9 +182,9 @@ input, select, textarea {
 }
 
 input:focus, select:focus, textarea:focus {
-  outline: 2px solid var(--color-gold);
-  outline-offset: 1px;
-  border-color: var(--color-gold);
+  outline: none;
+  border-color: var(--color-ink);
+  box-shadow: 0 0 0 1px var(--color-ink);
 }
 
 label {
