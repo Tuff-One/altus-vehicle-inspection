@@ -187,6 +187,33 @@ input:focus, select:focus, textarea:focus {
   box-shadow: 0 0 0 1px var(--color-ink);
 }
 
+.login-logo {
+  display: block;
+  max-width: 160px;
+  margin: 0 auto var(--space-md) auto;
+}
+/*
+.login-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.login-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+}*/
+
+.navbar-logo {
+  width: 95px;
+  height: 95px;
+  object-fit: contain;
+  margin-right: var(--space-sm);
+  border-radius: 10px;
+}
+
 label {
   display: block;
   font-size: 0.85rem;

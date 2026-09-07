@@ -35,7 +35,10 @@ function Login() {
 
   return (
     <div className="form-card">
-      <h1>Altus ICT</h1>
+  <div className="login-header">
+    <img src="/altus-logo.png" alt="Altus ICT" className="login-logo" />
+    <h1>Altus ICT</h1>
+  </div>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email</label>

@@ -7,6 +7,7 @@ function Navbar() {
 
   return (
     <nav>
+      <img src="/altus-logo.png" alt="Altus ICT" className="navbar-logo" />
       <Link to="/dashboard">Dashboard</Link>
       <Link to="/vehicles">Vehicles</Link>
       <Link to="/inspections">Inspections</Link>

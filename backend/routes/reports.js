@@ -63,7 +63,7 @@ router.get('/recurring-issues', verifyToken, checkPermission('view_reports'), as
 
 router.get('/dashboard-stats', verifyToken, checkPermission('view_reports'), async (req, res) => {
   try {
-    const [[{ totalVehicles }]] = await db.query('SELECT COUNT(*) AS totalVehicles FROM vehicles');
+    const [[{ totalVehicles }]] = await db.query("SELECT COUNT(*) AS totalVehicles FROM vehicles WHERE status <> 'inactive'");
 
     const [[{ openFaults }]] = await db.query(
       `SELECT COUNT(*) AS openFaults FROM inspection_results WHERE status IN ('faulty', 'needs_attention')`

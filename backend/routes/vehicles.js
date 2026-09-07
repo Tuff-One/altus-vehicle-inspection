@@ -64,7 +64,7 @@ router.put('/:id', verifyToken, checkPermission('manage_vehicles'), async (req, 
   }
 });
 
-router.delete('/:id', verifyToken, checkPermission('manage_vehicles'), async (req, res) => {
+router.delete('/:id', verifyToken, checkPermission('manage_vehicle_status'), async (req, res) => {
   const { id } = req.params;
   try {
     const [result] = await db.query('UPDATE vehicles SET status = ? WHERE id = ?', ['inactive', id]);
@@ -72,6 +72,33 @@ router.delete('/:id', verifyToken, checkPermission('manage_vehicles'), async (re
       return res.status(404).json({ error: 'Vehicle not found.' });
     }
     res.json({ message: 'Vehicle removed.' });
+  } catch (err) {
+  console.error(err);
+  if (err.code === 'ER_DUP_ENTRY') {
+    return res.status(400).json({ error: 'A vehicle with this registration number already exists.' });
+  }
+  res.status(500).json({ error: 'Something went wrong.' });
+}
+});
+
+router.get('/inactive', verifyToken, checkPermission('manage_vehicles'), async (req, res) => {
+  try {
+    const [vehicles] = await db.query("SELECT * FROM vehicles WHERE status = 'inactive' ORDER BY name");
+    res.json(vehicles);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
+});
+
+router.patch('/:id/reactivate', verifyToken, checkPermission('manage_vehicle_status'), async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [result] = await db.query("UPDATE vehicles SET status = 'active' WHERE id = ?", [id]);
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: 'Vehicle not found.' });
+    }
+    res.json({ message: 'Vehicle reactivated.' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Something went wrong.' });

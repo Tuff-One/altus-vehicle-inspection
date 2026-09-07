@@ -11,6 +11,7 @@ function AddVehicle() {
   const [type, setType] = useState('');
   const [registrationNumber, setRegistrationNumber] = useState('');
   const [error, setError] = useState('');
+  const [currentMileage, setCurrentMileage] = useState('');
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -18,7 +19,7 @@ function AddVehicle() {
 
     try {
       await addVehicle(
-        { name, type, registration_number: registrationNumber },
+        { name, type, registration_number: registrationNumber, current_mileage: currentMileage },
         token
       );
       navigate('/vehicles');
@@ -44,6 +45,10 @@ function AddVehicle() {
           <label htmlFor="reg">Registration Number</label>
           <input id="reg" value={registrationNumber} onChange={(e) => setRegistrationNumber(e.target.value)} required />
         </div>
+        <div>
+  <label htmlFor="mileage">Current Mileage</label>
+  <input id="mileage" type="number" value={currentMileage} onChange={(e) => setCurrentMileage(e.target.value)} required />
+</div>
         {error && <p>{error}</p>}
         <button type="submit">Add Vehicle</button>
       </form>

@@ -23,3 +23,17 @@ export async function removeVehicle(id, token) {
   });
   return response.data;
 }
+
+export async function getInactiveVehicles(token) {
+  const response = await axios.get(`${API_URL}/inactive`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}
+
+export async function reactivateVehicle(id, token) {
+  const response = await axios.patch(`${API_URL}/${id}/reactivate`, {}, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.data;
+}

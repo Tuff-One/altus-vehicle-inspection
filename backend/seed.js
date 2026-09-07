@@ -56,6 +56,7 @@ async function seed() {
     'manage_users',
     'manage_boss_accounts',
     'view_reports',
+    'manage_vehicle_status',
   ];
   for (const perm of permissions) {
     await db.query('INSERT IGNORE INTO permissions (name) VALUES (?)', [perm]);
@@ -63,8 +64,8 @@ async function seed() {
 
   // Step 4: map roles to permissions, based on the Phase 3 matrix
   const rolePermissionMap = {
-    admin: ['manage_vehicles', 'manage_inspections', 'manage_inspection_items', 'manage_users', 'manage_boss_accounts', 'view_reports'],
-    boss: ['manage_vehicles', 'manage_inspections', 'manage_inspection_items', 'manage_users', 'view_reports'],
+    admin: ['manage_vehicles', 'manage_inspections', 'manage_inspection_items', 'manage_users', 'manage_boss_accounts', 'view_reports', 'manage_vehicle_status'],
+    boss: ['manage_vehicles', 'manage_inspections', 'manage_inspection_items', 'manage_users', 'view_reports', 'manage_vehicle_status'],
     supervisor: ['manage_vehicles', 'manage_inspections', 'manage_inspection_items', 'view_reports'],
     driver: [],
   };
